@@ -3,13 +3,12 @@ package com.gadek.logic;
 import com.gadek.TaskConfigurationProperties;
 import com.gadek.model.*;
 import com.gadek.model.projection.GroupReadModel;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+//@Service //todo usuniete bo tworzenie beana do LogicConfiguraion przeniesione
 public class ProjectService {
 
     private ProjectRepository repository;
@@ -42,7 +41,8 @@ public class ProjectService {
                     targetGroup.setTasks(project.getSteps().stream()
                             .map(step -> new Task(step.getDescription(), deadline.plusDays(step.getDaysToDeadline()))
                             ).collect(Collectors.toSet()));
-                    return targetGroup;
+                    targetGroup.setProject(project);
+                    return taskGroupRepository.save(targetGroup);
                 }).orElseThrow(() -> new IllegalArgumentException("Procjet with given id not found"));
         return new GroupReadModel(result);
     }
