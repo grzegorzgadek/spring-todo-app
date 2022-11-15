@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //todo to jest problematyczne
     private int id;
     @NotBlank(message = "Task description mus be set.")
     private String description;
@@ -28,8 +28,15 @@ public class Task {
     }
 
     public Task(String desc, LocalDateTime deadline) {
+        this(desc, deadline, null);
+    }
+
+    public Task(String desc, LocalDateTime deadline, TaskGroup taskGroup) {
         this.deadline = deadline;
         this.description= desc;
+        if (taskGroup != null) {
+            this.group = taskGroup;
+        }
     }
 
     public int getId() {
