@@ -4,3 +4,8 @@ spring:
     path: '/console'
   datasource:
     url: 'jdbc:h2:file:./todo-db'
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

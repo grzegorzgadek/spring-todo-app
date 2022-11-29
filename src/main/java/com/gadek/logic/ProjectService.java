@@ -42,7 +42,7 @@ public class ProjectService {
                 .map(project -> {
                     var targetGroup = new GroupWriteModel();
                     targetGroup.setDescription(project.getDescription());
-                    targetGroup.setTask(project.getSteps().stream()
+                    targetGroup.setTasks(project.getSteps().stream()
                             .map(step -> {
                                         var task = new GroupTaskWriteModel();
                                         task.setDescription(step.getDescription());
